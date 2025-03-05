@@ -1,0 +1,56 @@
+{
+    "drivers": [
+      {
+        "brand": "Titleist",
+        "model": "TSR3",
+        "year": 2024,
+        "loft": [8.0, 9.0, 10.0, 11.0],
+        "shaftOptions": ["Mitsubishi Tensei", "Project X HZRDUS", "Fujikura Ventus"],
+        "adjustability": {
+          "loft": true,
+          "lie": true,
+          "weight": true
+        },
+        "spin": "Mid-Low",
+        "launch": "Mid",
+        "headMaterial": "Titanium",
+        "headSize": 460,
+        "price": 599.99
+      },
+      {
+        "brand": "Callaway",
+        "model": "Paradym Ai Smoke Max",
+        "year": 2024,
+        "loft": [9.0, 10.5, 12.0],
+        "shaftOptions": ["Fujikura Ventus TR", "Mitsubishi Kai’li", "UST Helium"],
+        "adjustability": {
+          "loft": true,
+          "lie": true,
+          "weight": false
+        },
+        "spin": "Low",
+        "launch": "High",
+        "headMaterial": "Carbon Composite",
+        "headSize": 460,
+        "price": 629.99
+      },
+      {
+        "brand": "TaylorMade",
+        "model": "Qi10 Max",
+        "year": 2024,
+        "loft": [9.0, 10.5, 12.0],
+        "shaftOptions": ["Fujikura Speeder NX", "Mitsubishi Tensei", "Project X HZRDUS"],
+        "adjustability": {
+          "loft": true,
+          "lie": true,
+          "weight": true
+        },
+        "spin": "Mid",
+        "launch": "Mid-High",
+        "headMaterial": "Titanium & Carbon",
+        "headSize": 460,
+        "price": 599.99
+      }
+    ]
+  }
+  
