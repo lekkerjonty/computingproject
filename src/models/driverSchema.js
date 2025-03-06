@@ -1,23 +1,22 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema;
 
-const driverSchema = new mongoose.Schema({
-  brand: { type: String, required: true },
-  model: { type: String, required: true },
-  year: { type: Number, required: true },
-  loft: { type: [Number], required: true },
-  shaftOptions: { type: [String], required: true },
+const driverSchema = new Schema({
+  brand: { type: String},
+  model: { type: String},
+  year: { type: Number},
+  loft: { type: [Number]},
+  shaftOptions: { type: [String]},
   adjustability: {
     loft: { type: Boolean, default: false },
     lie: { type: Boolean, default: false },
     weight: { type: Boolean, default: false }
   },
-  spin: { type: String, enum: ["Low", "Mid-Low", "Mid", "Mid-High", "High"], required: true },
-  launch: { type: String, enum: ["Low", "Mid", "Mid-High", "High"], required: true },
-  headMaterial: { type: String, required: true },
-  headSize: { type: Number, required: true, min: 400, max: 460 },
-  price: { type: Number, required: true, min: 0 }
+  spin: { type: String, enum: ["Low", "Mid-Low", "Mid", "Mid-High", "High"]},
+  launch: { type: String, enum: ["Low", "Mid", "Mid-High", "High"]},
+  headMaterial: { type: String},
+  headSize: { type: Number, min: 400, max: 460 },
+  price: { type: Number, min: 0 }
 });
 
-const Driver = mongoose.model('Driver', driverSchema, 'Drivers'); // Explicitly specify the collection name
-
-module.exports = Driver;
+module.exports = mongoose.model('dSchema', driverSchema, 'Drivers');

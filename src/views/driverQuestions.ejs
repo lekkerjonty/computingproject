@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>WeSellGolf - The Ultimate Golf Club Selling Tool</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+    </head>
+    <body>
+        <!-- Responsive navbar-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container justify-content-center">
+                <a class="navbar-brand " href="/">Start Bootstrap</a>
+            </div>
+        </nav>
+        <!-- Page content-->
+        <div class="container">
+            <h1 class="mx-auto my-4 text-uppercase ojuju-fonts text-center">Driver Questions</h1>
+            <div id="question-container" class="text-center">
+                <p id="question"></p>
+                <div id="answer-container"></div>
+                <button class="btn btn-primary mt-3" onclick="nextQuestion()">Next</button>
+            </div>
+            <div id="recommendation-container" class="text-center" style="display: none;">
+                <h2>Recommendations</h2>
+                <p id="recommendations"></p>
+            </div>
+        </div>
+
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+        <script>
+            const questions = [
+                {
+                    type: "text",
+                    question: "What is your average driving distance?",
+                    placeholder: "Enter distance in yards"
+                },
+                {
+                    type: "slider",
+                    question: "What is your swing speed?",
+                    min: 50,
+                    max: 150,
+                    step: 1,
+                    unit: "mph"
+                },
+                {
+                    type: "radio",
+                    question: "Do you prefer a draw or fade?",
+                    options: ["Draw", "Fade"]
+                },
+                {
+                    type: "text",
+                    question: "What is your handicap?",
+                    placeholder: "Enter your handicap"
+                }
+            ];
+            const answers = [];
+            let currentQuestionIndex = 0;
+
+            function displayQuestion() {
+                const questionObj = questions[currentQuestionIndex];
+                document.getElementById('question').innerText = questionObj.question;
+                const answerContainer = document.getElementById('answer-container');
+                answerContainer.innerHTML = '';
+
+                if (questionObj.type === "text") {
+                    const input = document.createElement('input');
+                    input.type = 'text';
+                    input.className = 'form-control';
+                    input.placeholder = questionObj.placeholder;
+                    answerContainer.appendChild(input);
+                } else if (questionObj.type === "slider") {
+                    const input = document.createElement('input');
+                    input.type = 'range';
+                    input.className = 'form-range';
+                    input.min = questionObj.min;
+                    input.max = questionObj.max;
+                    input.step = questionObj.step;
+                    input.oninput = function() {
+                        document.getElementById('slider-value').innerText = input.value + ' ' + questionObj.unit;
+                    };
+                    answerContainer.appendChild(input);
+                    const sliderValue = document.createElement('p');
+                    sliderValue.id = 'slider-value';
+                    sliderValue.innerText = input.min + ' ' + questionObj.unit;
+                    answerContainer.appendChild(sliderValue);
+                } else if (questionObj.type === "radio") {
+                    questionObj.options.forEach(option => {
+                        const div = document.createElement('div');
+                        div.className = 'form-check';
+                        const input = document.createElement('input');
+                        input.type = 'radio';
+                        input.className = 'form-check-input';
+                        input.name = 'radioOptions';
+                        input.value = option;
+                        const label = document.createElement('label');
+                        label.className = 'form-check-label';
+                        label.innerText = option;
+                        div.appendChild(input);
+                        div.appendChild(label);
+                        answerContainer.appendChild(div);
+                    });
+                }
+            }
+
+            function nextQuestion() {
+                const answerContainer = document.getElementById('answer-container');
+                let answer;
+                if (questions[currentQuestionIndex].type === "radio") {
+                    const selectedOption = document.querySelector('input[name="radioOptions"]:checked');
+                    if (selectedOption) {
+                        answer = selectedOption.value;
+                    }
+                } else {
+                    answer = answerContainer.querySelector('input').value;
+                }
+
+                if (answer) {
+                    answers.push(answer);
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        displayQuestion();
+                    } else {
+                        showRecommendations();
+                    }
+                } else {
+                    alert('Please provide an answer.');
+                }
+            }
+
+            function showRecommendations() {
+                document.getElementById('question-container').style.display = 'none';
+                document.getElementById('recommendation-container').style.display = 'block';
+                document.getElementById('recommendations').innerText = "Based on your answers, we recommend the following clubs...";
+                // Add logic here to provide recommendations based on answers
+            }
+
+            // Display the first question when the page loads
+            displayQuestion();
+        </script>
+    </body>
+</html>

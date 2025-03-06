@@ -9,17 +9,16 @@ const app = express();
 app.use(express.static('public'));
 const port = process.env.PORT || PORT;
 const mongoose = require('mongoose');
+
+
+
+
+mongoose.connect('mongodb+srv://jontypeter88:lekkerjonty@golfclubs.dyucj.mongodb.net/GolfClubs?retryWrites=true&w=majority&appName=GolfClubs');
 const db = mongoose.connection;
-
-
-
-mongoose.connect('mongodb+srv://jontypeter88:lekkerjonty@golfclubs.dyucj.mongodb.net/?retryWrites=true&w=majority&appName=GolfClubs');
 db.on("error", console.error.bind(console, "connection error: "));
-db.once("open", function (){
+db.once("open", function () {
   console.log("connected to MongoDB");
 });
-
-
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
