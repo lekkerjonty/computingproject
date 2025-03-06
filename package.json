@@ -27,6 +27,7 @@
     "jquery": "^3.7.1",
     "mongoose": "^8.12.1",
     "morgan": "^1.10.0",
+    "nodemon": "^3.1.9",
     "save": "^2.9.0"
   },
   "nodemonConfig": {
