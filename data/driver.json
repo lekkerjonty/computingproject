@@ -1,56 +1,146 @@
-{
-    "drivers": [
-      {
-        "brand": "Titleist",
-        "model": "TSR3",
-        "year": 2024,
-        "loft": [8.0, 9.0, 10.0, 11.0],
-        "shaftOptions": ["Mitsubishi Tensei", "Project X HZRDUS", "Fujikura Ventus"],
-        "adjustability": {
-          "loft": true,
-          "lie": true,
-          "weight": true
-        },
-        "spin": "Mid-Low",
-        "launch": "Mid",
-        "headMaterial": "Titanium",
-        "headSize": 460,
-        "price": 599.99
-      },
-      {
-        "brand": "Callaway",
-        "model": "Paradym Ai Smoke Max",
-        "year": 2024,
-        "loft": [9.0, 10.5, 12.0],
-        "shaftOptions": ["Fujikura Ventus TR", "Mitsubishi Kai’li", "UST Helium"],
-        "adjustability": {
-          "loft": true,
-          "lie": true,
-          "weight": false
-        },
-        "spin": "Low",
-        "launch": "High",
-        "headMaterial": "Carbon Composite",
-        "headSize": 460,
-        "price": 629.99
-      },
-      {
-        "brand": "TaylorMade",
-        "model": "Qi10 Max",
-        "year": 2024,
-        "loft": [9.0, 10.5, 12.0],
-        "shaftOptions": ["Fujikura Speeder NX", "Mitsubishi Tensei", "Project X HZRDUS"],
-        "adjustability": {
-          "loft": true,
-          "lie": true,
-          "weight": true
-        },
-        "spin": "Mid",
-        "launch": "Mid-High",
-        "headMaterial": "Titanium & Carbon",
-        "headSize": 460,
-        "price": 599.99
-      }
-    ]
+[
+  {
+    "brand": "Titleist",
+    "model": "TSR2",
+    "year": 2023,
+    "loft": 9.0,
+    "launch": "Mid-High",
+    "forgiveness": "High",
+    "swing_speed": "Moderate-Fast",
+    "shot_shape_bias": "Neutral",
+    "adjustability": true,
+    "price": 499.99
+  },
+  {
+    "brand": "Callaway",
+    "model": "Rogue ST Max",
+    "year": 2022,
+    "loft": 10.5,
+    "launch": "Mid",
+    "forgiveness": "Very High",
+    "swing_speed": "Slow-Moderate",
+    "shot_shape_bias": "Draw Bias",
+    "adjustability": true,
+    "price": 449.99
+  },
+  {
+    "brand": "TaylorMade",
+    "model": "Stealth 2 Plus",
+    "year": 2023,
+    "loft": 9.0,
+    "launch": "Low-Mid",
+    "forgiveness": "Moderate",
+    "swing_speed": "Fast",
+    "shot_shape_bias": "Neutral",
+    "adjustability": true,
+    "price": 529.99
+  },
+  {
+    "brand": "Ping",
+    "model": "G430 Max",
+    "year": 2023,
+    "loft": 10.5,
+    "launch": "High",
+    "forgiveness": "Very High",
+    "swing_speed": "Slow-Moderate",
+    "shot_shape_bias": "Neutral",
+    "adjustability": true,
+    "price": 549.99
+  },
+  {
+    "brand": "Cobra",
+    "model": "LTDx LS",
+    "year": 2022,
+    "loft": 9.0,
+    "launch": "Low-Mid",
+    "forgiveness": "Moderate",
+    "swing_speed": "Fast",
+    "shot_shape_bias": "Fade Bias",
+    "adjustability": true,
+    "price": 479.99
+  },
+  {
+    "brand": "Mizuno",
+    "model": "ST-Z 230",
+    "year": 2023,
+    "loft": 10.5,
+    "launch": "Mid",
+    "forgiveness": "High",
+    "swing_speed": "Moderate",
+    "shot_shape_bias": "Neutral",
+    "adjustability": true,
+    "price": 499.99
+  },
+  {
+    "brand": "PXG",
+    "model": "0811 XF Gen5",
+    "year": 2022,
+    "loft": 12.0,
+    "launch": "Very High",
+    "forgiveness": "Very High",
+    "swing_speed": "Slow",
+    "shot_shape_bias": "Draw Bias",
+    "adjustability": true,
+    "price": 399.99
+  },
+  {
+    "brand": "Srixon",
+    "model": "ZX5 Mk II",
+    "year": 2023,
+    "loft": 9.5,
+    "launch": "Mid",
+    "forgiveness": "High",
+    "swing_speed": "Moderate-Fast",
+    "shot_shape_bias": "Neutral",
+    "adjustability": false,
+    "price": 429.99
+  },
+  {
+    "brand": "Wilson",
+    "model": "D9 Driver",
+    "year": 2021,
+    "loft": 10.5,
+    "launch": "Mid-High",
+    "forgiveness": "High",
+    "swing_speed": "Slow-Moderate",
+    "shot_shape_bias": "Neutral",
+    "adjustability": false,
+    "price": 299.99
+  },
+  {
+    "brand": "Cleveland",
+    "model": "Launcher XL Lite",
+    "year": 2022,
+    "loft": 12.0,
+    "launch": "High",
+    "forgiveness": "Very High",
+    "swing_speed": "Slow",
+    "shot_shape_bias": "Neutral",
+    "adjustability": false,
+    "price": 199.99
+  },
+  {
+    "brand": "MacGregor",
+    "model": "V Foil Speed",
+    "year": 2021,
+    "loft": 10.5,
+    "launch": "Mid",
+    "forgiveness": "High",
+    "swing_speed": "Moderate",
+    "shot_shape_bias": "Neutral",
+    "adjustability": false,
+    "price": 179.99
+  },
+  {
+    "brand": "Tour Edge",
+    "model": "Hot Launch E523",
+    "year": 2023,
+    "loft": 10.5,
+    "launch": "Mid-High",
+    "forgiveness": "Very High",
+    "swing_speed": "Slow-Moderate",
+    "shot_shape_bias": "Draw Bias",
+    "adjustability": false,
+    "price": 189.99
   }
-  
+]
