@@ -173,31 +173,33 @@
             }
 
             function nextQuestion() {
-                const answerContainer = document.getElementById('answer-container');
-                let answer;
-                if (questions[currentQuestionIndex].type === "radio") {
-                    const selectedOption = document.querySelector('input[name="radioOptions"]:checked');
-                    if (selectedOption) {
-                        answer = selectedOption.value;
-                    }
-                } else if (questions[currentQuestionIndex].type === "range") {
-                    answer = answerContainer.querySelector('input').value;
-                } else {
-                    answer = answerContainer.querySelector('input').value;
-                }
+    const answerContainer = document.getElementById('answer-container');
+    let answer;
+    if (questions[currentQuestionIndex].type === "radio") {
+        const selectedOption = document.querySelector('input[name="radioOptions"]:checked');
+        if (selectedOption) {
+            answer = selectedOption.value;
+        }
+    } else if (questions[currentQuestionIndex].type === "range") {
+        answer = answerContainer.querySelector('input').value;
+    } else {
+        answer = answerContainer.querySelector('input').value;
+    }
 
-                if (answer) {
-                    answers.push(answer);
-                    currentQuestionIndex++;
-                    if (currentQuestionIndex < questions.length) {
-                        displayQuestion();
-                    } else {
-                        showRecommendations();
-                    }
-                } else {
-                    alert('Please provide an answer.');
-                }
-            }
+    if (answer) {
+        answers.push(answer);
+        currentQuestionIndex++;
+        if (currentQuestionIndex < questions.length) {
+            displayQuestion();
+        } else {
+            // Redirect to /results with answers as query parameters
+            const queryString = answers.map((ans, index) => `q${index}=${encodeURIComponent(ans)}`).join('&');
+            window.location.href = `/results?${queryString}`;
+        }
+    } else {
+        alert('Please provide an answer.');
+    }
+}
 
             function updateProgressBar() {
                 const progressBar = document.getElementById('progress-bar');
@@ -206,7 +208,7 @@
                 progressBar.setAttribute('aria-valuenow', progress);
             }
 
-            function showRecommendations() {
+            function showRecommendations(data) {
                 document.getElementById('question-container').style.display = 'none';
                 document.getElementById('recommendation-container').style.display = 'block';
                 document.getElementById('recommendations').innerText = "Based on your answers, we recommend the following clubs...";
