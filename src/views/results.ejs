@@ -30,6 +30,16 @@
                         <a class="btn btn-primary btn-lg px-4 me-sm-3 mt-3" href="/">Start Again</a>
                     </div>
                 </div>
+                <div class="container px-4 px-lg-5 my-5">
+                    <!-- Sidebar for displaying user's answers -->
+                    <div class="sidebar text-white">
+                        <h3>Your Answers</h3>
+                        <ul>
+                            <% answers.forEach((answer, index) => { %>
+                                <li><strong>Q<%= index + 1 %>:</strong> <%= answer %></li>
+                            <% }); %>
+                        </ul>
+                    </div>
             </div>
         </header>
         <!-- Section-->
@@ -39,8 +49,6 @@
                     <% for (let i = 0; i < drivers.length; i++) { %>
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <!-- Product image-->
-                            <img class="card-img-top" src="https://dummyimage.com/450x300/dee2e6/6c757d.jpg" alt="..." />
                             <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -49,6 +57,7 @@
                                     <h3 class="fw-bolder"><%= drivers[i].brand %></h3>
                                     <h5 class="fw-bolder"><%= drivers[i].model %></h5>
                                     <h5 class="fw-bolder"><%= drivers[i].loft %>°</h5>
+                                    <h5 class="fw-bolder"><%= drivers[i].forgiveness %></h5>
                                     <!-- Product price-->    
                                     <p1>£<%= drivers[i].price %></p1>
                                 </div>
