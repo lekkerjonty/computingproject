@@ -105,13 +105,13 @@ router.get('/results', async (req, res) => {
         if (answers[1]) {
             const struggle = answers[1];
             if (struggle === 'Distance') {
-                query.forgiveness = 'Distance'; // Filter for distance
+                query.launch = { $in: ['Low', 'Mid']} // Filter for distance
             } else if (struggle === 'Accuracy') {
-                query.forgiveness = 'Accuracy'; // Filter for accuracy
+                query.forgiveness = { $in: ['High', 'Very High']}; // Filter for accuracy
             } else if (struggle === 'Consistency') {
-                query.forgiveness = 'Consistency'; // Filter for consistency
+                query.forgiveness = { $in: ['High', 'Very High']}; // Filter for consistency
             } else if (struggle === 'Control') {
-                query.forgiveness = 'Control'; // Filter for control
+                query.forgiveness = 'Moderate'; // Filter for control
             }
         }
 
