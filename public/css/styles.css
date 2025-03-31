@@ -10823,4 +10823,21 @@ textarea.form-control-lg {
   .d-print-none {
     display: none !important;
   }
+
+  /* Custom CSS */
+
+  .radio-group {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+.radio-group .form-check {
+    display: flex;
+    align-items: center;
+}
+.radio-group .form-check-input {
+    margin-right: 10px; /* Adjust the gap between radio button and label */
+}
 }
