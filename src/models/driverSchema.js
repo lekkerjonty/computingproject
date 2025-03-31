@@ -6,9 +6,9 @@ const driverSchema = new Schema({
   model: { type: String, required: true },
   year: { type: Number, required: true },
   loft: { type: Number, required: true },
-  launch: { type: String, enum: ["Low", "Low-Mid", "Mid", "Mid-High", "High", "Very High"] },
-  forgiveness: { type: String, enum: ["Moderate", "High", "Very High"] },
-  swing_speed: { type: String, enum: ["Slow", "Slow-Moderate", "Moderate", "Moderate-Fast", "Fast"] },
+  launch: { type: String, enum: ["Low", "Mid", "High"] },
+  forgiveness: { type: String, enum: ["Low", "Mid", "High", "Very High"] },
+  swing_speed: { type: String, enum: ["Slow", "Average", "Fast"] },
   shot_shape_bias: { type: String, enum: ["Neutral", "Fade Bias", "Draw Bias"] },
   adjustability: { type: Boolean },
   price: { type: Number, min: 0 }

@@ -379,12 +379,7 @@ select:disabled {
   display: none !important;
 }
 
-button,
-[type=button],
-[type=reset],
-[type=submit] {
-  -webkit-appearance: button;
-}
+
 button:not(:disabled),
 [type=button]:not(:disabled),
 [type=reset]:not(:disabled),
@@ -439,11 +434,6 @@ legend + * {
   height: auto;
 }
 
-[type=search] {
-  outline-offset: -2px;
-  -webkit-appearance: textfield;
-}
-
 /* rtl:raw:
 [type="tel"],
 [type="url"],
@@ -458,11 +448,6 @@ legend + * {
 
 ::-webkit-color-swatch-wrapper {
   padding: 0;
-}
-
-::file-selector-button {
-  font: inherit;
-  -webkit-appearance: button;
 }
 
 output {
@@ -10840,4 +10825,15 @@ textarea.form-control-lg {
 .radio-group .form-check-input {
     margin-right: 10px; /* Adjust the gap between radio button and label */
 }
+
+.product-details p,
+.product-details h3,
+.product-details h5 {
+    margin: 5px 0; /* Reduce vertical spacing */
+}
+
+.product-details {
+    line-height: 1.2; /* Adjust line height for tighter spacing */
+}
+
 }

@@ -10,9 +10,6 @@ app.use(express.static('public'));
 const port = process.env.PORT || PORT;
 const mongoose = require('mongoose');
 
-
-
-
 mongoose.connect('mongodb+srv://jontypeter88:lekkerjonty@golfclubs.dyucj.mongodb.net/GolfClubs?retryWrites=true&w=majority&appName=GolfClubs');
 const db = mongoose.connection;
 db.on("error", console.error.bind(console, "connection error: "));
@@ -22,8 +19,6 @@ db.once("open", function () {
 app.set('views', './src/views');
 app.set('view engine', 'ejs');
 
-// app.use('/App.Routes', router)
-
 
 app.use(express.static(path.join(__dirname, '/public')));
 app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
@@ -31,12 +26,6 @@ app.use('/js', express.static(path.join(__dirname, '/node_modules/bootstrap/dist
 app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist')));
 app.use('/', AppRouter);
 app.use(express.json());
-
-// const feedRouter = require('./src/routes/feed.js');
-
-
-// app.use('/feed', feedRouter);
-
 
 app.use(morgan('tiny'));
 app.get('/', function(req, res){

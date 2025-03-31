@@ -11,7 +11,7 @@
         <!-- Bootstrap icons-->
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
-        <link href="css/styles.css" rel="stylesheet" />
+        <link href="/css/styles.css" rel="stylesheet" />
     </head>
     <body>
         <!-- Navigation-->
@@ -28,50 +28,150 @@
                     <p class="lead fw-normal text-white-50 mb-0">Based on your answers, here are some recommendations.</p>
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                         <a class="btn btn-primary btn-lg px-4 me-sm-3 mt-3" href="/">Start Again</a>
+                        <a class="btn btn-primary btn-lg px-4 me-sm-3 mt-3" data-bs-toggle="collapse" href="#collapseAnswers" role="button" aria-expanded="false" aria-controls="collapseExample">
+                            Click to View Your Answers
+                          </a>
                     </div>
                 </div>
-                <div class="container px-4 px-lg-5 my-5">
-                    <!-- Sidebar for displaying user's answers -->
-                    <div class="sidebar text-white">
+                <div class="collapse" id="collapseAnswers">
+                    <div class="card card-body mt-3 ">
                         <h3>Your Answers</h3>
                         <ul>
-                            <% answers.forEach((answer, index) => { %>
-                                <li><strong>Q<%= index + 1 %>:</strong> <%= answer %></li>
+                            <% questions.forEach((q, index) => { %>
+                                <li class="list-group-item">
+                                    <strong>Q<%= index + 1 %>: <%= q.question %></strong>
+                                    <p>Your Answer: <%= answers[index] %></p>
+                                    <p class="text-muted"><%= q.explanation %></p>
+                                </li>
                             <% }); %>
                         </ul>
                     </div>
+                  </div>
             </div>
         </header>
         <!-- Section-->
         <section class="py-5">
             <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="text-center">Your Perfect Matches</h2>
                 <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <% for (let i = 0; i < drivers.length; i++) { %>
+                    <% primaryRecommendations.forEach(driver => { %>
                     <div class="col mb-5">
                         <div class="card h-100">
-                            <!-- Product details-->
                             <div class="card-body p-4">
                                 <div class="text-center">
-                                    <!-- Product name-->
-                                    <p6 class="fw-bolder"><%= drivers[i].year %></p6>
-                                    <h3 class="fw-bolder"><%= drivers[i].brand %></h3>
-                                    <h5 class="fw-bolder"><%= drivers[i].model %></h5>
-                                    <h5 class="fw-bolder"><%= drivers[i].loft %>°</h5>
-                                    <h5 class="fw-bolder"><%= drivers[i].forgiveness %></h5>
-                                    <!-- Product price-->    
-                                    <p1>£<%= drivers[i].price %></p1>
+                                    <p class="fw-bolder"><%= driver.year %></p>
+                                    <h3 class="fw-bolder"><%= driver.brand %></h3>
+                                    <h5 class="fw-bolder"><%= driver.model %></h5>
+                                    <p class="fw-bolder">Loft: <%= driver.loft %>°</p>
+                                    <p class="fw-bolder">Forgiveness: <%= driver.forgiveness %></p>
+                                    <p class="fw-bolder">Launch: <%= driver.launch %></p>
+                                    <p class="fw-bolder">£<%= driver.price %></p>
+                                    <p class="fw-bolder text-success">Match: <%= driver.matchPercentage %>%</p>
                                 </div>
                             </div>
-                            
                         </div>
                     </div>
-                    <% } %>
+                    <% }); %>
                 </div>
+                <% if (primaryRecommendations.length > 4) { %>
+                    <div class="text-center mt-4">
+                        <button id="show-all-primary" class="btn btn-primary">Show All</button>
+                    </div>
+                    <% } %>
             </div>
+        </section>
+        
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="text-center">Closest Recommendations</h2>
+                <p class="text-center">The Drivers Below Are Only Missing One Criteria</p>
+                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <% secondaryRecommendations.forEach(driver => { %>
+                    <div class="col mb-5">
+                        <div class="card h-100">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <p class="fw-bolder"><%= driver.year %></p>
+                                    <h3 class="fw-bolder"><%= driver.brand %></h3>
+                                    <h5 class="fw-bolder"><%= driver.model %></h5>
+                                    <p class="fw-bolder">Loft: <%= driver.loft %>°</p>
+                                    <p class="fw-bolder">Forgiveness: <%= driver.forgiveness %></p>
+                                    <p class="fw-bolder">Launch: <%= driver.launch %></p>
+                                    <p class="fw-bolder">£<%= driver.price %></p>
+                                    <p class="fw-bolder text-warning">Match: <%= driver.matchPercentage %>%</p>
+                                    <p class="fw-bolder text-danger">Missing Criteria: <%= driver.missingCriteria.join(', ') %></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <% }); %>
+                </div>
+                <% if (secondaryRecommendations.length > 4) { %>
+                    <div class="text-center mt-4">
+                        <button id="show-all-secondary" class="btn btn-primary">Show All</button>
+                    </div>
+                    <% } %>
+            </div>
+            <section class="py-5">
+                <div class="container px-4 px-lg-5 mt-5">
+                    <h2 class="text-center">Other Recommendations</h2>
+                    <p class="text-center">The Drivers Below May Not Fit All The Criteria But They're Still Great.</p>
+                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        <% tertiaryRecommendations.forEach(driver => { %>
+                        <div class="col mb-5">
+                            <div class="card h-100">
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <p class="fw-bolder"><%= driver.year %></p>
+                                        <h3 class="fw-bolder"><%= driver.brand %></h3>
+                                        <h5 class="fw-bolder"><%= driver.model %></h5>
+                                        <p class="fw-bolder">Loft: <%= driver.loft %>°</p>
+                                        <p class="fw-bolder">Forgiveness: <%= driver.forgiveness %></p>
+                                        <p class="fw-bolder">Launch: <%= driver.launch %></p>
+                                        <p class="fw-bolder">£<%= driver.price %></p>
+                                        <p class="fw-bolder text-warning">Match: <%= driver.matchPercentage %>%</p>
+                                        <p class="fw-bolder text-danger">Missing Criteria: <%= driver.missingCriteria.join(', ') %></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    <% if (tertiaryRecommendations.length > 4) { %>
+                        <div class="text-center mt-4">
+                            <button id="show-all-primary" class="btn btn-primary">Show All</button>
+                        </div>
+                        <% } %>
+                </div>
+            </section>
         </section>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js"></script>
+        <script src="js/scripts.js">
+            document.addEventListener('DOMContentLoaded', () => {
+        // Show all primary recommendations
+        const showAllPrimaryButton = document.getElementById('show-all-primary');
+        if (showAllPrimaryButton) {
+            showAllPrimaryButton.addEventListener('click', () => {
+                document.querySelectorAll('.recommendation-item.d-none').forEach(item => {
+                    item.classList.remove('d-none');
+                });
+                showAllPrimaryButton.style.display = 'none'; // Hide the button after showing all
+            });
+        }
+
+        // Show all secondary recommendations
+        const showAllSecondaryButton = document.getElementById('show-all-secondary');
+        if (showAllSecondaryButton) {
+            showAllSecondaryButton.addEventListener('click', () => {
+                document.querySelectorAll('.recommendation-item-secondary.d-none').forEach(item => {
+                    item.classList.remove('d-none');
+                });
+                showAllSecondaryButton.style.display = 'none'; // Hide the button after showing all
+            });
+        }
+    });
+        </script>
     </body>
 </html>
