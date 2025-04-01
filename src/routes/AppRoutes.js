@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const Driver = require('../models/driverSchema'); 
-// const Iron = require('../models/ironSchema'); // Import the Iron model
+const Shaft = require('../models/shaftSchema');
 
 router.get('/', function(req, res){
     try {
@@ -87,18 +87,28 @@ router.get('/results', async (req, res) => {
         // Construct the query based on all the answers
         const query = {};
 
-        
-        // Budget (answers[0])
+            // Budget (answers[0])
         if (answers[0] && answers[0] !== "Don't Mind") {
-            const budgetRange = answers[0].replace(/[^0-9 -]/g, '').split(' - ');
-        if (budgetRange.length === 2) {
-        const budget = parseInt(budgetRange[1]);
-        if (!isNaN(budget)) {
-            query.price = { $lte: budget }; // Filter by budget
-            console.log(`Filtering by budget: <= £${budget}`);
-        }}} else {
-        console.log('Skipping budget filter as the user selected "Don\'t Mind".');
+        const budgetAnswer = answers[0];
+        const budget = parseInt(budgetAnswer.replace(/[^0-9]/g, '')); // Extract the numeric value from the answer
+
+        if (budgetAnswer.startsWith('<')) {
+            // Handle "< £X"
+            query.price = { $lte: budget };
+        } else if (budgetAnswer.includes('-')) {
+            // Handle "£X - £Y"
+            const [min, max] = budgetAnswer.split('-').map(val => parseInt(val.replace(/[^0-9]/g, '')));
+            query.price = { $gte: min, $lte: max };
+        } else if (budgetAnswer.endsWith('+')) {
+            // Handle "£X+"
+            query.price = { $gte: budget };
         }
+
+        console.log(`Filtering by budget: ${JSON.stringify(query.price)}`);
+        } else {
+            console.log('Skipping budget filter as the user selected "Don\'t Mind".');
+        }
+        
 
         // Driving distance (answers[1])
         if (answers[1]) {
@@ -282,6 +292,17 @@ router.get('/results', async (req, res) => {
         res.render('results', { primaryRecommendations, secondaryRecommendations, tertiaryRecommendations, answers, questions});
         }   catch (error) {
         console.error('Error fetching drivers:', error);
+        res.status(500).send('Internal Server Error');
+    }
+});
+
+router.get('/selectShafts', async (req, res) => {
+    try {
+        const shafts = await Shaft.find({});
+        console.log(`Number of shafts retrieved: ${shafts.length}`); // Log the count of shafts
+        res.render('selectShafts', { shafts });
+    } catch (error) {
+        console.error('Error rendering selectShafts page:', error);
         res.status(500).send('Internal Server Error');
     }
 });

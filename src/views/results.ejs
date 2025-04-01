@@ -12,6 +12,22 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
         <!-- Core theme CSS (includes Bootstrap)-->
         <link href="/css/styles.css" rel="stylesheet" />
+        <style>
+            .card .fw-bolder {
+                margin: 0.2rem 0; /* Reduce vertical margins */
+                line-height: 1.2; /* Adjust line height for tighter spacing */
+            }
+        
+            .card .text-success,
+            .card .text-warning,
+            .card .text-danger {
+                margin-top: 0.2rem; /* Reduce top margin for match and missing criteria */
+            }
+        
+            .card-body {
+                padding: 1rem; /* Adjust padding inside the card body */
+            }
+        </style>
     </head>
     <body>
         <!-- Navigation-->
@@ -29,7 +45,7 @@
                     <div class="d-grid gap-3 d-sm-flex justify-content-sm-center">
                         <a class="btn btn-primary btn-lg px-4 me-sm-3 mt-3" href="/">Start Again</a>
                         <a class="btn btn-primary btn-lg px-4 me-sm-3 mt-3" data-bs-toggle="collapse" href="#collapseAnswers" role="button" aria-expanded="false" aria-controls="collapseExample">
-                            Click to View Your Answers
+                            Click to View Your Answers and Recommendations
                           </a>
                     </div>
                 </div>
@@ -51,43 +67,50 @@
         </header>
         <!-- Section-->
         <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
+            <div class="container px-4 px-lg-5 mt-1">
                 <h2 class="text-center">Your Perfect Matches</h2>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <% primaryRecommendations.forEach(driver => { %>
-                    <div class="col mb-5">
-                        <div class="card h-100">
-                            <div class="card-body p-4">
-                                <div class="text-center">
-                                    <p class="fw-bolder"><%= driver.year %></p>
-                                    <h3 class="fw-bolder"><%= driver.brand %></h3>
-                                    <h5 class="fw-bolder"><%= driver.model %></h5>
-                                    <p class="fw-bolder">Loft: <%= driver.loft %>°</p>
-                                    <p class="fw-bolder">Forgiveness: <%= driver.forgiveness %></p>
-                                    <p class="fw-bolder">Launch: <%= driver.launch %></p>
-                                    <p class="fw-bolder">£<%= driver.price %></p>
-                                    <p class="fw-bolder text-success">Match: <%= driver.matchPercentage %>%</p>
+                <% if (primaryRecommendations.length === 0) { %>
+                    <div class="text-center mt-2">
+                        <p class="fw-bold text-danger">Sorry, no perfect matches were found based on your answers.</p>
+                        <p class="fw-bold">Please check out the closest recommendations below.</p>
+                    </div>
+                <% } else { %>
+                    <div class="row gx-4 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        <% primaryRecommendations.forEach((driver, index) => { %>
+                        <div class="col mb-3 driver-card-primary <%= index >= 4 ? 'd-none' : '' %>">
+                            <div class="card h-100">
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <p class="fw-bolder"><%= driver.year %></p>
+                                        <h3 class="fw-bolder"><%= driver.brand %></h3>
+                                        <h5 class="fw-bolder"><%= driver.model %></h5>
+                                        <p class="fw-bolder">Loft: <%= driver.loft %>°</p>
+                                        <p class="fw-bolder">Forgiveness: <%= driver.forgiveness %></p>
+                                        <p class="fw-bolder">Launch: <%= driver.launch %></p>
+                                        <p class="fw-bolder">£<%= driver.price %></p>
+                                        <p class="fw-bolder text-success">Match: <%= driver.matchPercentage %>%</p>
+                                        <a href="/selectShafts?brand=<%= driver.brand %>&model=<%= driver.model %>&price=<%= driver.price %>" class="btn btn-primary mt-2">Add to Cart</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
+                        <% }); %>
                     </div>
-                    <% }); %>
-                </div>
-                <% if (primaryRecommendations.length > 4) { %>
-                    <div class="text-center mt-4">
+                    <% if (primaryRecommendations.length > 4) { %>
+                    <div class="text-center mt-2">
                         <button id="show-all-primary" class="btn btn-primary">Show All</button>
                     </div>
                     <% } %>
+                <% } %>
             </div>
         </section>
         
-        <section class="py-5">
-            <div class="container px-4 px-lg-5 mt-5">
-                <h2 class="text-center">Closest Recommendations</h2>
-                <p class="text-center">The Drivers Below Are Only Missing One Criteria</p>
-                <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                    <% secondaryRecommendations.forEach(driver => { %>
-                    <div class="col mb-5">
+        <section class="py-5 bg-dark" id="closest-recommendations">
+            <div class="container px-4 px-lg-5 mt-1">
+                <h2 class="text-center text-white">Closest Recommendations</h2>
+                <div class="row gx-4 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <% secondaryRecommendations.forEach((driver, index) => { %>
+                    <div class="col mb-3 driver-card-secondary <%= index >= 4 ? 'd-none' : '' %>">
                         <div class="card h-100">
                             <div class="card-body p-4">
                                 <div class="text-center">
@@ -107,71 +130,119 @@
                     <% }); %>
                 </div>
                 <% if (secondaryRecommendations.length > 4) { %>
-                    <div class="text-center mt-4">
-                        <button id="show-all-secondary" class="btn btn-primary">Show All</button>
-                    </div>
-                    <% } %>
+                <div class="text-center mt-2">
+                    <button id="show-all-secondary" class="btn btn-primary">Show All</button>
+                </div>
+                <% } %>
             </div>
-            <section class="py-5">
-                <div class="container px-4 px-lg-5 mt-5">
-                    <h2 class="text-center">Other Recommendations</h2>
-                    <p class="text-center">The Drivers Below May Not Fit All The Criteria But They're Still Great.</p>
-                    <div class="row gx-4 gx-lg-5 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
-                        <% tertiaryRecommendations.forEach(driver => { %>
-                        <div class="col mb-5">
-                            <div class="card h-100">
-                                <div class="card-body p-4">
-                                    <div class="text-center">
-                                        <p class="fw-bolder"><%= driver.year %></p>
-                                        <h3 class="fw-bolder"><%= driver.brand %></h3>
-                                        <h5 class="fw-bolder"><%= driver.model %></h5>
-                                        <p class="fw-bolder">Loft: <%= driver.loft %>°</p>
-                                        <p class="fw-bolder">Forgiveness: <%= driver.forgiveness %></p>
-                                        <p class="fw-bolder">Launch: <%= driver.launch %></p>
-                                        <p class="fw-bolder">£<%= driver.price %></p>
-                                        <p class="fw-bolder text-warning">Match: <%= driver.matchPercentage %>%</p>
-                                        <p class="fw-bolder text-danger">Missing Criteria: <%= driver.missingCriteria.join(', ') %></p>
-                                    </div>
+        </section>
+        
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-5">
+                <h2 class="text-center">Other Recommendations</h2>
+                <div class="row gx-4 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                    <% tertiaryRecommendations.forEach((driver, index) => { %>
+                    <div class="col mb-3 driver-card-tertiary <%= index >= 4 ? 'd-none' : '' %>">
+                        <div class="card h-100">
+                            <div class="card-body p-4">
+                                <div class="text-center">
+                                    <p class="fw-bolder"><%= driver.year %></p>
+                                    <h3 class="fw-bolder"><%= driver.brand %></h3>
+                                    <h5 class="fw-bolder"><%= driver.model %></h5>
+                                    <p class="fw-bolder">Loft: <%= driver.loft %>°</p>
+                                    <p class="fw-bolder">Forgiveness: <%= driver.forgiveness %></p>
+                                    <p class="fw-bolder">Launch: <%= driver.launch %></p>
+                                    <p class="fw-bolder">£<%= driver.price %></p>
+                                    <p class="fw-bolder text-warning">Match: <%= driver.matchPercentage %>%</p>
+                                    <p class="fw-bolder text-danger">Missing Criteria: <%= driver.missingCriteria.join(', ') %></p>
                                 </div>
                             </div>
                         </div>
-                        <% }); %>
                     </div>
-                    <% if (tertiaryRecommendations.length > 4) { %>
-                        <div class="text-center mt-4">
-                            <button id="show-all-primary" class="btn btn-primary">Show All</button>
-                        </div>
-                        <% } %>
+                    <% }); %>
                 </div>
-            </section>
+                <% if (tertiaryRecommendations.length > 4) { %>
+                <div class="text-center mt-2">
+                    <button id="show-all-tertiary" class="btn btn-primary">Show All</button>
+                </div>
+                <% } %>
+            </div>
         </section>
         <!-- Bootstrap core JS-->
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
         <!-- Core theme JS-->
-        <script src="js/scripts.js">
+        <script src="js/scripts.js"></script>
+        <script>
             document.addEventListener('DOMContentLoaded', () => {
-        // Show all primary recommendations
-        const showAllPrimaryButton = document.getElementById('show-all-primary');
-        if (showAllPrimaryButton) {
-            showAllPrimaryButton.addEventListener('click', () => {
-                document.querySelectorAll('.recommendation-item.d-none').forEach(item => {
-                    item.classList.remove('d-none');
-                });
-                showAllPrimaryButton.style.display = 'none'; // Hide the button after showing all
+                // Toggle visibility for primary recommendations
+                const showAllPrimaryButton = document.getElementById('show-all-primary');
+                if (showAllPrimaryButton) {
+                    console.log('Primary button found');
+                    showAllPrimaryButton.addEventListener('click', () => {
+                        const hiddenItems = document.querySelectorAll('.driver-card-primary.d-none');
+                        console.log('Primary hidden items:', hiddenItems.length);
+                        if (hiddenItems.length > 0) {
+                            // Show all hidden items
+                            hiddenItems.forEach(item => item.classList.remove('d-none'));
+                            showAllPrimaryButton.textContent = 'Show Less'; // Update button text
+                        } else {
+                            // Hide items beyond the first 4
+                            document.querySelectorAll('.driver-card-primary').forEach((item, index) => {
+                                if (index >= 4) item.classList.add('d-none');
+                            });
+                            showAllPrimaryButton.textContent = 'Show All'; // Update button text
+                        }
+                    });
+                } else {
+                    console.log('Primary button not found');
+                }
+        
+                // Toggle visibility for secondary recommendations
+                const showAllSecondaryButton = document.getElementById('show-all-secondary');
+                if (showAllSecondaryButton) {
+                    console.log('Secondary button found');
+                    showAllSecondaryButton.addEventListener('click', () => {
+                        const hiddenItems = document.querySelectorAll('.driver-card-secondary.d-none');
+                        console.log('Secondary hidden items:', hiddenItems.length);
+                        if (hiddenItems.length > 0) {
+                            // Show all hidden items
+                            hiddenItems.forEach(item => item.classList.remove('d-none'));
+                            showAllSecondaryButton.textContent = 'Show Less'; // Update button text
+                        } else {
+                            // Hide items beyond the first 4
+                            document.querySelectorAll('.driver-card-secondary').forEach((item, index) => {
+                                if (index >= 4) item.classList.add('d-none');
+                            });
+                            showAllSecondaryButton.textContent = 'Show All'; // Update button text
+                        }
+                    });
+                } else {
+                    console.log('Secondary button not found');
+                }
+        
+                // Toggle visibility for tertiary recommendations
+                const showAllTertiaryButton = document.getElementById('show-all-tertiary');
+                if (showAllTertiaryButton) {
+                    console.log('Tertiary button found');
+                    showAllTertiaryButton.addEventListener('click', () => {
+                        const hiddenItems = document.querySelectorAll('.driver-card-tertiary.d-none');
+                        console.log('Tertiary hidden items:', hiddenItems.length);
+                        if (hiddenItems.length > 0) {
+                            // Show all hidden items
+                            hiddenItems.forEach(item => item.classList.remove('d-none'));
+                            showAllTertiaryButton.textContent = 'Show Less'; // Update button text
+                        } else {
+                            // Hide items beyond the first 4
+                            document.querySelectorAll('.driver-card-tertiary').forEach((item, index) => {
+                                if (index >= 4) item.classList.add('d-none');
+                            });
+                            showAllTertiaryButton.textContent = 'Show All'; // Update button text
+                        }
+                    });
+                } else {
+                    console.log('Tertiary button not found');
+                }
             });
-        }
-
-        // Show all secondary recommendations
-        const showAllSecondaryButton = document.getElementById('show-all-secondary');
-        if (showAllSecondaryButton) {
-            showAllSecondaryButton.addEventListener('click', () => {
-                document.querySelectorAll('.recommendation-item-secondary.d-none').forEach(item => {
-                    item.classList.remove('d-none');
-                });
-                showAllSecondaryButton.style.display = 'none'; // Hide the button after showing all
-            });
-        }
-    });
         </script>
     </body>
 </html>

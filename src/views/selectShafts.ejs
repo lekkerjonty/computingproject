@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+        <meta name="description" content="" />
+        <meta name="author" content="" />
+        <title>Shop Homepage - Start Bootstrap Template</title>
+        <!-- Favicon-->
+        <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+        <!-- Bootstrap icons-->
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
+        <!-- Core theme CSS (includes Bootstrap)-->
+        <link href="css/styles.css" rel="stylesheet" />
+        <style>
+            .top-left-buttons {
+                position: absolute;
+                top: 20px;
+                left: 20px;
+                display: flex;
+                flex-direction: column; /* Stack buttons vertically */
+            }
+        
+            .top-left-buttons .btn {
+                width: 150px; /* Optional: Set a consistent button width */
+            }
+        
+            .top-left-buttons .btn + .btn {
+                margin-top: 10px; /* Add spacing between buttons */
+            }
+            .card .fw-bolder {
+                margin: 0.2rem 0; /* Reduce vertical margins */
+                line-height: 1.2; /* Adjust line height for tighter spacing */
+            }
+        
+            .card .text-success,
+            .card .text-warning,
+            .card .text-danger {
+                margin-top: 0.2rem; /* Reduce top margin for match and missing criteria */
+            }
+        
+            .card-body {
+                padding: 1rem; /* Adjust padding inside the card body */
+            }
+        </style>
+    </head>
+    <body>
+        <!-- Navigation-->
+        <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+            <div class="container justify-content-center">
+                <a class="navbar-brand justify-content-center" href="/">Golf Club Recommendations</a>
+            </div>
+        </nav>
+        <!-- Header-->
+        <header class="bg-dark py-5">
+            <div class="top-left-buttons">
+                <button class="btn btn-primary mb-2" onclick="window.location.href='/'">Start Again</button>
+                <button class="btn btn-primary" onclick="window.location.href='/results'">Back to Results</button>
+            </div>
+            <div class="container px-4 px-lg-5 my-5">
+                <div class="text-center text-white">
+                    <h1 class="display-4 fw-bolder">Now time to pick your shaft.</h1>
+                </div>
+            </div>
+        </header>
+        <!-- Section-->
+        <section class="py-5">
+            <div class="container px-4 px-lg-5 mt-1">
+                <h2 class="text-center">Your Shaft Matches</h2>
+                    <div class="row gx-4 gx-lg-3 row-cols-2 row-cols-md-3 row-cols-xl-4 justify-content-center">
+                        <% shafts.forEach((Shafts, index) => { %>
+                        <div class="col mb-3 driver-card-primary">
+                            <div class="card h-100">
+                                <div class="card-body p-4">
+                                    <div class="text-center">
+                                        <h3 class="fw-bolder"><%= Shafts.brand %></h3>
+                                        <h5 class="fw-bolder"><%= Shafts.model %></h5>
+                                        <p class="fw-bolder">Flex: <%= Shafts.flex %></p>
+                                        <p class="fw-bolder">Weight: <%= Shafts.weight %></p>
+                                        <p class="fw-bolder">Launch: <%= Shafts.launch %></p>
+                                        <p class="fw-bolder">Material: <%= Shafts.material %></p>
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <% }); %>
+                    </div>
+                    
+            </div>
+        </section>
+        <!-- Bootstrap core JS-->
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+        <!-- Core theme JS-->
+        <script src="js/scripts.js"></script>
+    </body>
+</html>

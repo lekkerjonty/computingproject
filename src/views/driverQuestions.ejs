@@ -19,15 +19,6 @@
                 align-items: center;
                 gap: 10px;
             }
-        
-            .radio-group .form-check {
-                display: flex;
-                align-items: center;
-            }
-        
-            .radio-group .form-check-input {
-                margin-right: 10px; /* Adjust the gap between the radio button and label */
-            }
         </style>
     </head>
     <body>
@@ -48,10 +39,6 @@
                 <div id="answer-container"></div>
                 <button class="btn btn-primary mt-3" onclick="nextQuestion()">Next</button>
             </div>
-            <div id="recommendation-container" class="text-center" style="display: none;">
-                <h2>Recommendations</h2>
-                <p id="recommendations"></p>
-            </div>
         </div>
 
         <!-- Bootstrap core JS-->
@@ -63,7 +50,7 @@
                 {
                     type: "radio",
                     question: "What is your budget?",
-                    options: ["< £100", "£100 - £200", "£200 - £300", "£300+", "Don't Mind"]
+                    options: ["< £100", "£100 - £300", "£300 - £400", "£400+", "Don't Mind"]
                 },
                 {
                     type: "radio",
@@ -90,11 +77,12 @@
                     question: "What is your biggest struggle with your current driver?",
                     options: ["Distance", "Accuracy", "Consistency", "Trajectory", "Feel"]
                 },
-                // {
-                //     type: "radio",
-                //     question: "What is your height? in cm",
-                //     options: ["145 - 152", "152 - 160", "160 - 168", "168 - 175", "175 - 183", "183 - 190", "190 - 198", "198 - 206", "206 - 213"]
-                // },
+                {
+
+                    type : "radio",
+                    question: "What is your height? in cm",
+                    options: ["< 150 cm", "150 - 160 cm", "160 - 170 cm", "170 - 180 cm", "180 - 190 cm", "> 190 cm"]
+                },
                 {
                     type: "radio",
                     question: "Finally, Is there a specific brand you prefer?",
@@ -110,91 +98,50 @@
                 const answerContainer = document.getElementById('answer-container');
                 answerContainer.innerHTML = '';
 
-                if (questionObj.type === "text") {
+                const radioGroup = document.createElement('div');
+                radioGroup.className = 'radio-group';
+                questionObj.options.forEach(option => {
+                    const div = document.createElement('div');
+                    div.className = 'form-check';
                     const input = document.createElement('input');
-                    input.type = 'text';
-                    input.className = 'form-control';
-                    input.placeholder = questionObj.placeholder;
-                    answerContainer.appendChild(input);
-                } else if (questionObj.type === "range") {
-                    const input = document.createElement('input');
-                    input.type = 'range';
-                    input.className = 'form-range';
-                    input.min = questionObj.min;
-                    input.max = questionObj.max;
-                    input.step = questionObj.step;
-                    input.oninput = function() {
-                        document.getElementById('slider-value').innerText = input.value + ' ' + questionObj.unit;
-                    };
-                    answerContainer.appendChild(input);
-                    const sliderValue = document.createElement('p');
-                    sliderValue.id = 'slider-value';
-                    sliderValue.innerText = input.min + ' ' + questionObj.unit;
-                    answerContainer.appendChild(sliderValue);
-                } else if (questionObj.type === "radio") {
-                    const radioGroup = document.createElement('div');
-                    radioGroup.className = 'radio-group';
-                    questionObj.options.forEach(option => {
-                        const div = document.createElement('div');
-                        div.className = 'form-check';
-                        const input = document.createElement('input');
-                        input.type = 'radio';
-                        input.className = 'form-check-input';
-                        input.name = 'radioOptions';
-                        input.value = option;
-                        const label = document.createElement('label');
-                        label.className = 'form-check-label';
-                        label.innerText = option;
-                        div.appendChild(input);
-                        div.appendChild(label);
-                        radioGroup.appendChild(div);
-                    });
-                    answerContainer.appendChild(radioGroup);
-                }
+                    input.type = 'radio';
+                    input.className = 'form-check-input';
+                    input.name = 'radioOptions';
+                    input.value = option;
+                    const label = document.createElement('label');
+                    label.className = 'form-check-label';
+                    label.innerText = option;
+                    div.appendChild(input);
+                    div.appendChild(label);
+                    radioGroup.appendChild(div);
+                });
+                answerContainer.appendChild(radioGroup);
+
                 updateProgressBar();
             }
 
             function nextQuestion() {
-    const answerContainer = document.getElementById('answer-container');
-    let answer;
-    if (questions[currentQuestionIndex].type === "radio") {
-        const selectedOption = document.querySelector('input[name="radioOptions"]:checked');
-        if (selectedOption) {
-            answer = selectedOption.value;
-        }
-    } else if (questions[currentQuestionIndex].type === "range") {
-        answer = answerContainer.querySelector('input').value;
-    } else {
-        answer = answerContainer.querySelector('input').value;
-    }
-
-    if (answer) {
-        answers.push(answer);
-        currentQuestionIndex++;
-        if (currentQuestionIndex < questions.length) {
-            displayQuestion();
-        } else {
-            // Redirect to /results with answers as query parameters
-            const queryString = answers.map((ans, index) => `q${index}=${encodeURIComponent(ans)}`).join('&');
-            window.location.href = `/results?${queryString}`;
-        }
-    } else {
-        alert('Please provide an answer.');
-    }
-}
+                const selectedOption = document.querySelector('input[name="radioOptions"]:checked');
+                if (selectedOption) {
+                    answers.push(selectedOption.value);
+                    currentQuestionIndex++;
+                    if (currentQuestionIndex < questions.length) {
+                        displayQuestion();
+                    } else {
+                        // Redirect to /results with answers as query parameters
+                        const queryString = answers.map((ans, index) => `q${index}=${encodeURIComponent(ans)}`).join('&');
+                        window.location.href = `/results?${queryString}`;
+                    }
+                } else {
+                    alert('Please provide an answer.');
+                }
+            }
 
             function updateProgressBar() {
                 const progressBar = document.getElementById('progress-bar');
                 const progress = ((currentQuestionIndex + 1) / questions.length) * 100;
                 progressBar.style.width = progress + '%';
                 progressBar.setAttribute('aria-valuenow', progress);
-            }
-
-            function showRecommendations(data) {
-                document.getElementById('question-container').style.display = 'none';
-                document.getElementById('recommendation-container').style.display = 'block';
-                document.getElementById('recommendations').innerText = "Based on your answers, we recommend the following clubs...";
-                // Add logic here to provide recommendations based on answers
             }
 
             // Display the first question when the page loads
