@@ -1,0 +1,209 @@
+ /* Custom CSS */
+
+ .radio-group-custom {
+  display: grid;
+  flex-direction: column;
+  align-items: center; /* Centers the radio buttons and labels horizontally */
+  vertical-align: middle;
+  justify-content: space-around; /* Centers the radio buttons and labels vertically */
+  gap: 10px; /* Adds spacing between the radio button options */
+}
+
+.radio-group-custom .form-check-custom {
+  display: flex;
+  align-items: center; /* Ensures the radio button and label are vertically aligned */
+  gap: 10px; /* Adds spacing between the radio button and the label */
+}
+
+.radio-group-custom .form-check-input-custom {
+  margin: 0; /* Removes any default margin applied by Bootstrap */
+  
+}
+
+.radio-group-custom .form-check-label-custom {
+  margin: 0; /* Removes any default margin applied by Bootstrap */
+}
+
+.product-details p,
+.product-details h3,
+.product-details h5 {
+    margin: 5px 0 !important; /* Reduce vertical spacing */
+}
+
+.product-details {
+    line-height: 1.2; /* Adjust line height for tighter spacing */
+}
+
+.card .fw-bolder {
+  margin: 0.2rem 0 !important; /* Reduce vertical margins */
+  line-height: 1.2 !important; /* Adjust line height for tighter spacing */
+}
+
+.card .text-success,
+.card .text-warning,
+.card .text-danger {
+  margin-top: 0.2rem !important; /* Reduce top margin for match and missing criteria */
+}
+
+.card-body {
+  padding: 1rem !important; /* Adjust padding inside the card body */
+}
+
+.card .fw-bolder {
+  margin: 0.2rem 0; /* Reduce vertical margins */
+  line-height: 1.2; /* Adjust line height for tighter spacing */
+}
+
+.card .text-success,
+.card .text-warning,
+.card .text-danger {
+  margin-top: 0.2rem; /* Reduce top margin for match and missing criteria */
+}
+
+.card-body {
+  padding: 1rem; /* Adjust padding inside the card body */
+}
+
+.progress-bar-custom {
+  border-radius: 10px;
+  background: linear-gradient(90deg, #007BFF, #00D8FF);
+  animation: progress-animation 1.5s ease-in-out; /* Animation for progress bar */
+  transition: var(--bs-progress-bar-transition);
+}
+
+@keyframes progress-animation {
+  0% {
+    width: 0%;
+  }
+  50% {
+    width: 100%; /* Progress to full width */
+  }
+  100% {
+    width: 12.5%; /* Return to 0% */
+  }
+}
+
+/* Loading screen styles */
+.loading-screen {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  font-size: 1.5rem;
+  z-index: 9999; /* Ensure it appears above all other content */
+  visibility: hidden; /* Initially hidden */
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+/* Spinner styles */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid white;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Show the loading screen */
+.loading-screen.show {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Screen container styles */
+.screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  transition: transform 0.5s ease-in-out; /* Smooth swipe animation */
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Hidden screen (off-screen to the right) */
+.hidden {
+  transform: translateX(100%); /* Move off-screen to the right */
+}
+
+/* Active screen (visible on the left) */
+.active {
+  transform: translateX(0); /* Move on-screen */
+}
+
+/* Swipe out screen (off-screen to the left) */
+.swipe-out {
+  transform: translateX(-100%); /* Move off-screen to the left */
+}
+
+/* Spinner styles */
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid rgba(255, 255, 255, 0.3);
+  border-top: 5px solid #007BFF;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-bottom: 20px;
+}
+
+/* Spinner animation */
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+/* Style for the top-left buttons container */
+.top-left-buttons {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  display: flex;
+  flex-direction: column; /* Stack buttons vertically */
+  gap: 10px; /* Add spacing between buttons */
+  z-index: 10; /* Ensure buttons appear above other content */
+}
+
+/* Style for the buttons */
+.top-left-buttons .btn {
+  width: 150px; /* Set a consistent button width */
+  text-align: center; /* Center the text inside the button */
+  font-size: 14px; /* Adjust font size for better readability */
+  background-color: azure;
+  color: #000000;
+  transition: background-color 0.7s , color 0.7s ease; /* Smooth transition for background and text color */
+}
+
+/* Hover effect for buttons */
+.top-left-buttons .btn:hover {
+  background-color: #0d5703; /* Darker green on hover */
+  color: white; /* Ensure text remains visible */
+}

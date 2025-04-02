@@ -165,7 +165,7 @@ h6, .h6 {
 
 p {
   margin-top: 0;
-  margin-bottom: 1rem;
+  margin-bottom: 0rem;
 }
 
 abbr[title] {
@@ -10809,31 +10809,5 @@ textarea.form-control-lg {
     display: none !important;
   }
 
-  /* Custom CSS */
-
-  .radio-group {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 10px;
-}
-.radio-group .form-check {
-    display: flex;
-    align-items: center;
-}
-.radio-group .form-check-input {
-    margin-right: 10px; /* Adjust the gap between radio button and label */
 }
 
-.product-details p,
-.product-details h3,
-.product-details h5 {
-    margin: 5px 0; /* Reduce vertical spacing */
-}
-
-.product-details {
-    line-height: 1.2; /* Adjust line height for tighter spacing */
-}
-
-}
