@@ -8,8 +8,8 @@ const shaftSchema = new mongoose.Schema({
     enum: ["Ladies", "Senior", "Regular", "Stiff", "Extra Stiff"], 
     required: true 
   },
-  weight: { type: Number, required: true }, // in grams
-  torque: { type: Number, required: true }, // in degrees
+  weight: { type: Number, required: true }, 
+  torque: { type: Number, required: true }, 
   launch: { type: String, enum: ["Low", "Mid", "High"], required: true },
   spin: { type: String, enum: ["Low", "Mid", "High"], required: true },
   material: { type: String, enum: ["Graphite", "Steel"], required: true }

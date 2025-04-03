@@ -1,73 +1,73 @@
- /* Custom CSS */
+
 
  .radio-group-custom {
   display: grid;
   flex-direction: column;
-  align-items: center; /* Centers the radio buttons and labels horizontally */
+  align-items: center;
   vertical-align: middle;
-  justify-content: space-around; /* Centers the radio buttons and labels vertically */
-  gap: 10px; /* Adds spacing between the radio button options */
+  justify-content: space-around;
+  gap: 10px;
 }
 
 .radio-group-custom .form-check-custom {
   display: flex;
-  align-items: center; /* Ensures the radio button and label are vertically aligned */
-  gap: 10px; /* Adds spacing between the radio button and the label */
+  align-items: center;
+  gap: 10px;
 }
 
 .radio-group-custom .form-check-input-custom {
-  margin: 0; /* Removes any default margin applied by Bootstrap */
+  margin: 0;
   
 }
 
 .radio-group-custom .form-check-label-custom {
-  margin: 0; /* Removes any default margin applied by Bootstrap */
+  margin: 0;
 }
 
 .product-details p,
 .product-details h3,
 .product-details h5 {
-    margin: 5px 0 !important; /* Reduce vertical spacing */
+    margin: 5px 0 !important;
 }
 
 .product-details {
-    line-height: 1.2; /* Adjust line height for tighter spacing */
+    line-height: 1.2;
 }
 
 .card .fw-bolder {
-  margin: 0.2rem 0 !important; /* Reduce vertical margins */
-  line-height: 1.2 !important; /* Adjust line height for tighter spacing */
+  margin: 0.2rem 0 !important;
+  line-height: 1.2 !important;
 }
 
 .card .text-success,
 .card .text-warning,
 .card .text-danger {
-  margin-top: 0.2rem !important; /* Reduce top margin for match and missing criteria */
+  margin-top: 0.2rem !important;
 }
 
 .card-body {
-  padding: 1rem !important; /* Adjust padding inside the card body */
+  padding: 1rem !important;
 }
 
 .card .fw-bolder {
-  margin: 0.2rem 0; /* Reduce vertical margins */
-  line-height: 1.2; /* Adjust line height for tighter spacing */
+  margin: 0.2rem 0;
+  line-height: 1.2;
 }
 
 .card .text-success,
 .card .text-warning,
 .card .text-danger {
-  margin-top: 0.2rem; /* Reduce top margin for match and missing criteria */
+  margin-top: 0.2rem;
 }
 
 .card-body {
-  padding: 1rem; /* Adjust padding inside the card body */
+  padding: 1rem;
 }
 
 .progress-bar-custom {
   border-radius: 10px;
   background: linear-gradient(90deg, #007BFF, #00D8FF);
-  animation: progress-animation 1.5s ease-in-out; /* Animation for progress bar */
+  animation: progress-animation 1.5s ease-in-out;
   transition: var(--bs-progress-bar-transition);
 }
 
@@ -76,34 +76,34 @@
     width: 0%;
   }
   50% {
-    width: 100%; /* Progress to full width */
+    width: 100%;
   }
   100% {
-    width: 12.5%; /* Return to 0% */
+    width: 12.5%;
   }
 }
 
-/* Loading screen styles */
+
 .loading-screen {
   position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.8); /* Semi-transparent black background */
+  background-color: rgba(0, 0, 0, 0.8);
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
   color: white;
   font-size: 1.5rem;
-  z-index: 9999; /* Ensure it appears above all other content */
-  visibility: hidden; /* Initially hidden */
+  z-index: 9999;
+  visibility: hidden;
   opacity: 0;
   transition: opacity 0.3s ease-in-out;
 }
 
-/* Spinner styles */
+
 .spinner {
   width: 50px;
   height: 50px;
@@ -114,7 +114,7 @@
   margin-bottom: 20px;
 }
 
-/* Spinner animation */
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -124,13 +124,13 @@
   }
 }
 
-/* Show the loading screen */
+
 .loading-screen.show {
   visibility: visible;
   opacity: 1;
 }
 
-/* Screen container styles */
+
 .screen {
   position: absolute;
   top: 0;
@@ -138,29 +138,29 @@
   width: 100%;
   height: 100%;
   background-color: white;
-  transition: transform 0.5s ease-in-out; /* Smooth swipe animation */
+  transition: transform 0.5s ease-in-out;
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
-/* Hidden screen (off-screen to the right) */
+
 .hidden {
-  transform: translateX(100%); /* Move off-screen to the right */
+  transform: translateX(100%);
 }
 
-/* Active screen (visible on the left) */
+
 .active {
-  transform: translateX(0); /* Move on-screen */
+  transform: translateX(0);
 }
 
-/* Swipe out screen (off-screen to the left) */
+
 .swipe-out {
-  transform: translateX(-100%); /* Move off-screen to the left */
+  transform: translateX(-100%);
 }
 
-/* Spinner styles */
+
 .spinner {
   width: 50px;
   height: 50px;
@@ -171,7 +171,7 @@
   margin-bottom: 20px;
 }
 
-/* Spinner animation */
+
 @keyframes spin {
   0% {
     transform: rotate(0deg);
@@ -181,29 +181,29 @@
   }
 }
 
-/* Style for the top-left buttons container */
+
 .top-left-buttons {
   position: absolute;
   top: 20px;
   left: 20px;
   display: flex;
-  flex-direction: column; /* Stack buttons vertically */
-  gap: 10px; /* Add spacing between buttons */
-  z-index: 10; /* Ensure buttons appear above other content */
+  flex-direction: column;
+  gap: 10px;
+  z-index: 10;
 }
 
-/* Style for the buttons */
+
 .top-left-buttons .btn {
-  width: 150px; /* Set a consistent button width */
-  text-align: center; /* Center the text inside the button */
-  font-size: 14px; /* Adjust font size for better readability */
+  width: 150px;
+  text-align: center;
+  font-size: 14px;
   background-color: azure;
   color: #000000;
-  transition: background-color 0.7s , color 0.7s ease; /* Smooth transition for background and text color */
+  transition: background-color 0.7s , color 0.7s ease;
 }
 
-/* Hover effect for buttons */
+
 .top-left-buttons .btn:hover {
-  background-color: #0d5703; /* Darker green on hover */
-  color: white; /* Ensure text remains visible */
+  background-color: #0d5703;
+  color: white;
 }

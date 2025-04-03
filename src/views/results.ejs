@@ -75,7 +75,7 @@
                                         <p class="fw-bolder">Launch: <%= driver.launch %></p>
                                         <p class="fw-bolder">£<%= driver.price %></p>
                                         <p class="fw-bolder text-success">Match: <%= driver.matchPercentage %>%</p>
-                                        <a href="/selectShafts?brand=<%= driver.brand %>&model=<%= driver.model %>&price=<%= driver.price %>" class="btn btn-primary mt-2">Add to Cart</a>
+                                        <a href="/selectShafts?<%= driver.brand %><%= driver.model %><%= driver.price %>" class="btn btn-primary mt-2">Add to Cart</a>
                                     </div>
                                 </div>
                             </div>
@@ -159,76 +159,7 @@
         <!-- Core theme JS-->
         <script src="js/scripts.js"></script>
         <script>
-            document.addEventListener('DOMContentLoaded', () => {
-                // Toggle visibility for primary recommendations
-                const showAllPrimaryButton = document.getElementById('show-all-primary');
-                if (showAllPrimaryButton) {
-                    console.log('Primary button found');
-                    showAllPrimaryButton.addEventListener('click', () => {
-                        const hiddenItems = document.querySelectorAll('.driver-card-primary.d-none');
-                        console.log('Primary hidden items:', hiddenItems.length);
-                        if (hiddenItems.length > 0) {
-                            // Show all hidden items
-                            hiddenItems.forEach(item => item.classList.remove('d-none'));
-                            showAllPrimaryButton.textContent = 'Show Less'; // Update button text
-                        } else {
-                            // Hide items beyond the first 4
-                            document.querySelectorAll('.driver-card-primary').forEach((item, index) => {
-                                if (index >= 4) item.classList.add('d-none');
-                            });
-                            showAllPrimaryButton.textContent = 'Show All'; // Update button text
-                        }
-                    });
-                } else {
-                    console.log('Primary button not found');
-                }
-        
-                // Toggle visibility for secondary recommendations
-                const showAllSecondaryButton = document.getElementById('show-all-secondary');
-                if (showAllSecondaryButton) {
-                    console.log('Secondary button found');
-                    showAllSecondaryButton.addEventListener('click', () => {
-                        const hiddenItems = document.querySelectorAll('.driver-card-secondary.d-none');
-                        console.log('Secondary hidden items:', hiddenItems.length);
-                        if (hiddenItems.length > 0) {
-                            // Show all hidden items
-                            hiddenItems.forEach(item => item.classList.remove('d-none'));
-                            showAllSecondaryButton.textContent = 'Show Less'; // Update button text
-                        } else {
-                            // Hide items beyond the first 4
-                            document.querySelectorAll('.driver-card-secondary').forEach((item, index) => {
-                                if (index >= 4) item.classList.add('d-none');
-                            });
-                            showAllSecondaryButton.textContent = 'Show All'; // Update button text
-                        }
-                    });
-                } else {
-                    console.log('Secondary button not found');
-                }
-        
-                // Toggle visibility for tertiary recommendations
-                const showAllTertiaryButton = document.getElementById('show-all-tertiary');
-                if (showAllTertiaryButton) {
-                    console.log('Tertiary button found');
-                    showAllTertiaryButton.addEventListener('click', () => {
-                        const hiddenItems = document.querySelectorAll('.driver-card-tertiary.d-none');
-                        console.log('Tertiary hidden items:', hiddenItems.length);
-                        if (hiddenItems.length > 0) {
-                            // Show all hidden items
-                            hiddenItems.forEach(item => item.classList.remove('d-none'));
-                            showAllTertiaryButton.textContent = 'Show Less'; // Update button text
-                        } else {
-                            // Hide items beyond the first 4
-                            document.querySelectorAll('.driver-card-tertiary').forEach((item, index) => {
-                                if (index >= 4) item.classList.add('d-none');
-                            });
-                            showAllTertiaryButton.textContent = 'Show All'; // Update button text
-                        }
-                    });
-                } else {
-                    console.log('Tertiary button not found');
-                }
-            });
+           
         </script>
     </body>
 </html>

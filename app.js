@@ -1,4 +1,5 @@
 const express = require('express');
+const session = require('express-session');
 const path = require('path');
 const chalk = require('chalk');
 const debug = require('debug')('app');
@@ -23,6 +24,13 @@ app.use(express.static(path.join(__dirname, '/public')));
 app.use('/css', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/css')));
 app.use('/js', express.static(path.join(__dirname, '/node_modules/bootstrap/dist/js')));
 app.use('/js', express.static(path.join(__dirname, '/node_modules/jquery/dist')));
+
+app.use(session({
+  secret: 'your-secret-key', // Replace with a strong secret key
+  resave: false, // Prevents resaving session if nothing has changed
+  saveUninitialized: true, // Saves uninitialized sessions
+  cookie: { secure: false } // Set to true if using HTTPS
+}));
 
 app.use('/', AppRouter);
 app.use(express.json());
